@@ -1,0 +1,16 @@
+label,parent,title,proximity_score,summary,keywords,count,percentage,cohesion_score,exemplar_statement_0,exemplar_statement_0_score,exemplar_statement_1,exemplar_statement_1_score
+-2,-1000,Low Content,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+-1,-1000,Outliers,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+0,-1000,Negative impact on quality of life,0.5,None,None,5,5,0.5,For the most part my quality of life has decreased. Work isn’t the point of my life. I had more flexibility working from home and still got my work done. Now I struggle to fit everything I want to do in my schedule and am always tired.,0.5,"Poorly, I enjoyed flex work even before pandemic and while wfh it was fine but now the return to office does not have the original flex environment as it once did",0.5
+1,-1000,No impact or change,0.5,None,None,5,5,0.5,No change for me in that I continue to have quite a bit of flexibility around balancing work and life.,0.5,Quality of life is the same,0.5
+2,-1000,Positive impact on quality of life,0.5,None,None,5,5,0.5,Significant improvement in productivity due to less time on road communing. Ability to work more seamlessly across timezones as we adopted a hybrid work policy. I do not need to be in office to take an off hour meeting with someone across the timezones. So more productive. Ability to connect increased professionally as no need to be at work. But personal relationships and getting to know people and have fun have reduced significantly. Social life reduced.,0.5,"For me, it has been very positive.  I have a good work-from-home setup that my company funded and I am fortunate enough to have a space that allows me to work and take meetings without distractions.",0.5
+3,0,Increased commute time - RTO negatively affecting work/life quality,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+4,0,Negative impact on interactions and collaborations,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+5,0,Negative impact on physical and mental health,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+6,0,Negative impact on work-life balance,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+7,1,No impact or change,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+8,2,Increased productivity levels due to hybrid/remote policy,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+9,2,Increased productivity/work quality due to RTO,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+10,2,Positive impact on physical and mental health,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+11,2,Positive impact on work-life balance due to hyrbrid/remote policy,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+12,2,Reduced commute time due to hybrid/remote schedule,0.5,None,None,5,5,0.5,None,0.5,None,0.5

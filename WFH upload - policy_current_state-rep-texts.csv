@@ -1,0 +1,11 @@
+label,parent,title,proximity_score,summary,keywords,count,percentage,cohesion_score,exemplar_statement_0,exemplar_statement_0_score,exemplar_statement_1,exemplar_statement_1_score
+-2,-1000,Low Content,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+-1,-1000,Outliers,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+0,-1000,No change in policy,0.5,None,None,5,5,0.5,Same policy as before; Exactly the same,0.5,not much change; half employees still work from home alternating,0.5
+1,-1000,Work location policies,0.5,None,None,5,5,0.5,My company largely remains flexible on return to office. A few leaders are strongly encouraging in-office three days a week. Employees in those orgs do not view the request favorably.,0.5,return to work is more productive in our organization; screen time is reduced. meeting people is very much easy. Overall more productive in many ways.,0.5
+2,-1000,Workplace adaptation strategies,0.5,None,None,5,5,0.5,We adopted Hybrid work policy where a combination of remote and on campus participation at work. We leverage technology to have an integrated work experience that spans across remote and on campus workforce to engage and work together.,0.5,"We have adopted a hybrid work policy, with different personas.; Persona A, 5-day per week in office; B, 3 or 4 days in office; C, 2-day in office; D, 1-day in office.",0.5
+3,0,No change in policy,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+4,1,Maintaining full remote work,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+5,1,Return to office strategy,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+6,2,Flexible work policies,0.5,None,None,5,5,0.5,None,0.5,None,0.5
+7,2,Migration to hybrid model,0.5,None,None,5,5,0.5,None,0.5,None,0.5

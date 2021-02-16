@@ -1,0 +1,11 @@
+label,parent_id,topic
+0,-1000,Low Content
+1,-1000,Work location policies
+2,-1000,No change in policy
+3,-1000,Workplace adaptation strategies
+4,3,Migration to hybrid model
+5,1,Return to office strategy
+6,3,Flexible work policies
+7,0,Low Content
+8,1,Maintaining full remote work
+9,2,No change in policy
