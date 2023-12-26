@@ -3,23 +3,24 @@ class Analyze_question:
     def __init__(self,wfh_alldata_path,curation_path) -> None:
         self.alldata=pd.read_csv(wfh_alldata_path)
         self.curation=pd.ExcelFile(curation_path)
-        self.result=pd.ExcelWriter('WFH_Upload.xlsx',engine='xlsxwriter')
+        self.result=pd.ExcelWriter('MR/WFH_Upload.xlsx',engine='xlsxwriter')
         self.alldata.to_excel(self.result,sheet_name='all-topics',index=False)
         
         for question in self.curation.sheet_names[1:]:
+            #print(question in self.alldata.columns)
             response_df=self.curation.parse(question,usecols=[0,1,2],skiprows=[0])
             topic_sub_df=self.curation.parse(question,usecols=[4,5],skiprows=[0]).dropna()
             
             insights_df= self.curation.parse(question,usecols=[8,10,11],skiprows=[0]).dropna()
             rep_df=self.rep_texts(topic_sub_df)
-
+            
             ex_rep_df= rep_df.join(insights_df.rename(columns={'Topic.2':'title'}).set_index('title'),on='title',how='left')
 
             self.rep_texts_export(ex_rep_df,question)
+            
             rep_df.set_index('title',inplace=True)
             topics=rep_df[rep_df['P_id']==-1000]
             subtopics=rep_df.reset_index().drop_duplicates(subset='title', keep='last').set_index('title')
-            #print(topics)
             res_df=response_df.join(topics['labels'],on='Topic',how='left')
             res_df=res_df.rename(columns={'labels':question+'_label_0','Topic':question+'_title_0'})
             
@@ -28,12 +29,15 @@ class Analyze_question:
             
             res_df[question+'_proximity_score_0']=0.5
             res_df[question+'_proximity_score_1']=0.5
+            res_df=res_df.rename(columns={'Responses':question})
+            
             res_df=res_df[[question,question+'_label_0', question+'_title_0',question+'_proximity_score_0',question+'_label_1', question+'title_1',question+'_proximity_score_1']]
+            
             res_df.set_index(question,inplace=True)
 
             self.alldata=self.alldata.join(res_df,on=question,how='left')
             self.alldata=self.alldata.reset_index().drop_duplicates(subset='index', keep='first').set_index('index')
-    
+            
             columns_to_replace = [question+'_label_0', question+'_title_0',question+'_proximity_score_0',question+'_label_1', question+'title_1',question+'_proximity_score_1']
             replacement_value = {
                 question+'_label_0' : topics.loc['Low Content',]['labels'],
@@ -43,8 +47,8 @@ class Analyze_question:
                 question+'title_1' : 'Low Content',
                 question+'_proximity_score_1' : 0.5, 
             }
-            self.alldata.loc[1:len(self.alldata[question].dropna())-1, columns_to_replace] = self.alldata.loc[1:len(self.alldata[question].dropna())-1, columns_to_replace].fillna(replacement_value)
-            
+            print(replacement_value)
+            self.alldata.loc[1:self.alldata[question].last_valid_index()-1, columns_to_replace] = self.alldata.loc[1:self.alldata[question].last_valid_index()-1, columns_to_replace].fillna(replacement_value)
         self.alldata.to_excel(self.result,sheet_name='all-topics',index=False)
 
         self.result.close()
@@ -54,9 +58,18 @@ class Analyze_question:
         return f'exported successful'
     
     def rep_texts(self,topic_sub_df):
+        
         neg_id=topic_sub_df.loc[topic_sub_df['Topic.1'].isin(['Low Content'])]['Topic.1']
-        neg_id=pd.concat([neg_id,pd.Series(['Outliers'])])
-
+        #print(neg_id,type(neg_id))
+        
+        #if 'Low Content' in neg_id:
+        #    neg_id=pd.concat([neg_id,pd.Series(['Outliers'])])
+        #else:
+        #print(list(neg_id))
+        neg_id=pd.concat([neg_id,pd.Series(['Outliers'])],ignore_index=True)
+        if  not 'Low Content' in list(neg_id):
+            neg_id=pd.concat([neg_id,pd.Series(['Low Content'])],ignore_index=True)
+        
         res_df= pd.DataFrame()
         pos_id=topic_sub_df[~ topic_sub_df['Topic.1'].isin(['Low Content'])]['Topic.1'].drop_duplicates()
         res_df['title']=pd.concat([neg_id,pos_id]).reset_index(drop=True)
@@ -76,8 +89,9 @@ class Analyze_question:
     def rep_texts_export(self,res_df,question):
         res_df=res_df.rename(columns={'labels':'label',
                        'P_id':'parent',
-                       'Exemplar_1':'exemplar_statement_0',
-                       'Exemplar_2':'exemplar_statement_1'})
+                       'Exemplar Response 1':'exemplar_statement_0',
+                       'Exemplar Responses 2':'exemplar_statement_1'})
+        #print(res_df.columns)
         res_df['proximity_score']=0.5
         res_df['summary']=None
         res_df['keywords']=None
@@ -103,5 +117,5 @@ class Analyze_question:
         res_df.to_excel(self.result,sheet_name= question+'-rep-texts' ,index=False)
 
 
-obj=Analyze_question('WFH upload - all-topics.csv', 'WFH Curation.xlsx')
+obj=Analyze_question('MR/Market Research Upload - all-topics.csv','MR/Market Research-Curation.xlsx')
 print(obj)
